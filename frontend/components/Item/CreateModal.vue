@@ -3,6 +3,15 @@
     <template #title> Create Item </template>
     <form @submit.prevent="create()">
       <LocationSelector v-model="form.location" />
+      <Autocomplete
+              v-if="preferences.editorAdvancedView"
+              v-model="parent"
+              v-model:search="query"
+              :items="results"
+              item-text="name"
+              label="Parent Item"
+              no-results-text="Type to search..."
+            />
       <FormTextField ref="nameInput" v-model="form.name" :trigger-focus="focused" :autofocus="true" label="Item Name" />
       <FormTextArea v-model="form.description" label="Item Description" />
       <FormMultiselect v-model="form.labels" label="Labels" :items="labels ?? []" />
